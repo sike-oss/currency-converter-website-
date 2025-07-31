@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <title>Currency Converter</title>
+  <link rel="icon" href="icon.png" type="image/x-icon" />
+  <link rel="stylesheet" href="https://pyscript.net/unstable/pyscript.css" />
+  <script defer src="https://pyscript.net/unstable/pyscript.js"></script>
+  <style>
+    body {
+      font-family: monospace;
+      background-color: #1e1e1e;
+      color: #00ffcc;
+      padding: 20px;
+    }
+
+    input,
+    select,
+    button {
+      font-size: 16px;
+      margin: 8px 0;
+      padding: 8px;
+      background-color: #333;
+      color: white;
+      border: none;
+      border-radius: 5px;
+    }
+
+    #output {
+      margin-top: 20px;
+      white-space: pre-line;
+      border-top: 1px dashed #00ffcc;
+      padding-top: 10px;
+      
+      font-size: 20px;
+      
+    }
+  </style>
+</head>
+
+<body>
+  <center>
+    <h1>WELCOME TO CURRENCY CONVERTER</h1>
+    <h2>Select a currency to convert to INR:</h2>
+
+    <select id="choice">
+      <option value="0">--Select an option--</option>
+      <option value="1">1. USD to INR</option>
+      <option value="2">2. EUR to INR</option>
+      <option value="3">3. AED to INR</option>
+      <option value="4">4. GBP to INR</option>
+      <option value="5">5. Exit</option>
+    </select><br>
+
+    <h2>Enter amount:</h2>
+    <input type="number" id="amount" />
+
+    <button id="convert">Convert</button>
+
+    <div id="output"></div>
+  </center>
+
+  <py-script>
+from pyscript import Element
+
+def usd_to_inr(usd):
+    return usd * 82.73
+
+def eur_to_inr(eur):
+    return eur * 90.12
+
+def aed_to_inr(aed):
+    return aed * 22.49
+
+def gbp_to_inr(gbp):
+    return gbp * 102.34
+
+def convert_currency(event=None):
+    choice = int(Element("choice").element.value)
+    amount_input = Element("amount").element.value
+    output = Element("output")
+
+    if choice == 5:
+        output.write("Exiting the converter. Refresh to restart.")
+        return
+
+    if not amount_input:
+        output.write("⚠️ Please enter an amount.")
+        return
+
+    try:
+        amount = float(amount_input)
+    except:
+        output.write("⚠️ Invalid amount entered.")
+        return
+
+    if choice == 1:
+        result = f"{amount} USD is equal to {usd_to_inr(amount):.2f} INR"
+    elif choice == 2:
+        result = f"{amount} EUR is equal to {eur_to_inr(amount):.2f} INR"
+    elif choice == 3:
+        result = f"{amount} AED is equal to {aed_to_inr(amount):.2f} INR"
+    elif choice == 4:
+        result = f"{amount} GBP is equal to {gbp_to_inr(amount):.2f} INR"
+    else:
+        result = "Invalid choice. Please enter a number between 1 and 5."
+
+    output.write(result)
+
+# Connect button
+Element("convert").element.onclick = convert_currency
+  </py-script>
+</body>
+
+</html>
