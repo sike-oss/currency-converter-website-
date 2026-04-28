@@ -4,3 +4,5 @@ In this website you can enter a value in a text box and select the
 currency of country you want to convert it then click on 
 convert button then a python logic will provike and using pyscript 
 it will be shown on web page 
+
+MADDE BY IMRAN MUNGE 
